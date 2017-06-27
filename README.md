@@ -6,13 +6,13 @@
 1. Azureでリソースグループ、SQLサーバ、SQL Databaseを作成する  
 2. VisualStudioでプロジェクトを作成する  
 3. ASP.Net Web Applicationテンプレートを選択し新規作成を行う  
-4. テンプレートの選択が表示されるので、Azure API Appを選択する  
-5. 作成されたプロジェクトに対し、NuGetパッケージマネージャーより必要なものを追加する  
+テンプレートの選択が表示されるので、Azure API Appを選択する  
+4. 作成されたプロジェクトに対し、NuGetパッケージマネージャーより必要なものを追加する  
 ・EntityFramework  
 ・Swashbuckle  
 ・Newtonsoft Json  
-6. 作成されたプロジェクトのModelsフォルダーにDAL(Data Access Layer)クラスを追加し、記述する  
-DALクラスはDbContextクラスを継承します  
+5. 作成されたプロジェクトのModelsフォルダーにDAL(Data Access Layer)クラスを追加し、記述する  
+DALクラスはDbContextクラスを継承する  
 例）  
 ```
 SampleDbContext.cs  
@@ -30,15 +30,15 @@ SampleDbContext.cs
 		}		
 	}		
 ```
-7. 	プロジェクトのModelsフォルダーにモデルクラスを追加し、記述を行う  
+6. 	プロジェクトのModelsフォルダーにモデルクラスを追加し、記述を行う  
 モデルクラス名は対象の単数形となるようにする  
 作成したモデルクラスのusingディレクティブに以下を追加する  
 using System.ComponentModel.DataAnnotations;  
 
-8. テーブル列の定義  
-テーブルの列をモデルクラスのパブリックメンバーとして記述します  
-テーブルの列であるパブリックメンバーはgetおよびsetアクセサを持つようにします  
-PK、FK、Not Null属性、桁数属性などはアノテーションを記述し、定義します  
+7. テーブル列の定義  
+テーブルの列をモデルクラスのパブリックメンバーとして記述する  
+テーブルの列であるパブリックメンバーはgetおよびsetアクセサを持つようにする  
+PK、FK、Not Null属性、桁数属性などはアノテーションを記述し、定義する  
 例）  
 [key] PK  
 [Key, Column(Order = 1)] PKが複数ある場合  
@@ -47,12 +47,12 @@ PK、FK、Not Null属性、桁数属性などはアノテーションを記述�
 [MaxLength(256)] 桁数属性  
 [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 自動採番
 
-9. リレーションシップの定義  
+8. リレーションシップの定義  
 1:n、n:n、1:1or0の関係のリレーションシップの定義を行うことが可能  
 本サンプルでは未使用
 
-10. アプリケーション実行時の処理をGlobal.asax.csに記述する  
-アプリケーション実行時、DBが存在しない場合自動で作成するように記述を行います
+9. アプリケーション実行時の処理をGlobal.asax.csに記述する  
+アプリケーション実行時、DBが存在しない場合自動で作成するように記述を行う
 
 ```
 protected void Application_Start()	
@@ -62,7 +62,7 @@ protected void Application_Start()
 }
 ```
 
-11. Web.configにDBへの接続文字列を定義する  
+10. Web.configにDBへの接続文字列を定義する  
 configration直下にconnectionStringsを定義する  
 例）
 ```
@@ -74,7 +74,7 @@ configration直下にconnectionStringsを定義する
 	</connectionStrings>					
 ```
 
-12. Web.configにHTTPSリダイレクトを定義する  
+11. Web.configにHTTPSリダイレクトを定義する  
 APIに対しHTTPS通信を行いアクセスする場合、Web.configにリダイレクト設定の定義を記述する  
 例）
 ```
@@ -93,13 +93,13 @@ APIに対しHTTPS通信を行いアクセスする場合、Web.configにリダ�
 	  </rewrite>					
 ```
 
-13. コントローラークラスを作成する  
+12. コントローラークラスを作成する  
 クライアントから呼び出されて実際に処理を行うコントローラークラスを生成する  
-13.1 ソリューションエクスプローラーでControllersフォルダを右クリックし、追加=>コントローラーの順に選択する  
-13.2 Entity Framework を使用したアクションがある Web API 2 コントローラーを選択し、追加をクリックする  
-13.3 読み書き対象とするモデルクラスおよびDALを指定し追加をクリック  
+12.1 ソリューションエクスプローラーでControllersフォルダを右クリックし、追加=>コントローラーの順に選択する  
+12.2 Entity Framework を使用したアクションがある Web API 2 コントローラーを選択し、追加をクリックする  
+12.3 読み書き対象とするモデルクラスおよびDALを指定し追加をクリック  
 
-14. 後の工程で行うREST API クライアント生成で必要となるSwaggerを取得できるようにするため、Swaggerを公開するように修正を行う  
+13. 後の工程で行うREST API クライアント生成で必要となるSwaggerを取得できるようにするため、Swaggerを公開するように修正を行う  
 以下のコメント化されている個所をアンコメントする
 ```
 // ***** Uncomment the following to enable the swagger UI *****																								
@@ -110,10 +110,10 @@ APIに対しHTTPS通信を行いアクセスする場合、Web.configにリダ�
 */					←削除する			
 ```
 
-15. Web APIをAzure上にデプロイする  
+14. Web APIをAzure上にデプロイする  
 https://docs.microsoft.com/ja-jp/azure/app-service-api/app-service-api-dotnet-get-started　を参考にWeb APIをAzure上にデプロイする  
 
-16. Swaggerで操作が可能になっていれば成功
+15. Swaggerで操作が可能になっていれば成功
 
 ## アプリ開発
 1. http://furuya02.hatenablog.com/entry/2014/10/05/053525　を参考にHTTPClientでリクエストを送る
