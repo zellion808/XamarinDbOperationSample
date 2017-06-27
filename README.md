@@ -1,5 +1,5 @@
 # XamarinAzureDBOperationSample
-【Xamarin】AzureのSQL Databaseへの読み書きを行うAPIの開発手順、アプリ側の実装手順です
+【Xamarin】AzureのSQL Databaseへの読み書きを行うAPIの開発手順、アプリ側の開発手順です
 
 # 手順（備忘録）
 ## API開発
@@ -76,7 +76,6 @@ configration直下にconnectionStringsを定義する
 
 11. Web.configにHTTPSリダイレクトを定義する  
 APIに対しHTTPS通信を行いアクセスする場合、Web.configにリダイレクト設定の定義を記述する  
-例）
 ```
 <system.webServer>						
 	  <!-- HTTPSリダイレクト -->					
@@ -98,8 +97,10 @@ APIに対しHTTPS通信を行いアクセスする場合、Web.configにリダ�
 12.1 ソリューションエクスプローラーでControllersフォルダを右クリックし、追加=>コントローラーの順に選択する  
 12.2 Entity Framework を使用したアクションがある Web API 2 コントローラーを選択し、追加をクリックする  
 12.3 読み書き対象とするモデルクラスおよびDALを指定し追加をクリック  
+12.4 必要に応じてカスタマイズする  
+本サンプルではgetメソッドを書き換え、LINQで複数テーブルから情報をselect,joinし、値を返す処理を実装している
 
-13. 後の工程で行うREST API クライアント生成で必要となるSwaggerを取得できるようにするため、Swaggerを公開するように修正を行う  
+13. Swaggerを公開するように修正を行う  
 以下のコメント化されている個所をアンコメントする
 ```
 // ***** Uncomment the following to enable the swagger UI *****																								
@@ -111,21 +112,24 @@ APIに対しHTTPS通信を行いアクセスする場合、Web.configにリダ�
 ```
 
 14. Web APIをAzure上にデプロイする  
-https://docs.microsoft.com/ja-jp/azure/app-service-api/app-service-api-dotnet-get-started　を参考にWeb APIをAzure上にデプロイする  
+https://docs.microsoft.com/ja-jp/azure/app-service-api/app-service-api-dotnet-get-started  を参考にWeb APIをAzure上にデプロイする  
 
 15. Swaggerで操作が可能になっていれば成功
 
 ## アプリ開発
-1. http://furuya02.hatenablog.com/entry/2014/10/05/053525　を参考にHTTPClientでリクエストを送る
+1. http://furuya02.hatenablog.com/entry/2014/10/05/053525  を参考にHTTPClientでリクエストを送る  
+リクエストを送るURLはSwaggerに書いてある
 
 
-# その他備忘録
+# その他の情報
 ## APIのリモートデバッグの方法
 https://blogs.msdn.microsoft.com/tsmatsuz/2013/01/31/visual-studio-azure-remote-debug/  
-VSのサーバーエクスプローラー画面からデプロイしたAPIを右クリックし、デバッガーのアタッチ
+VSのサーバーエクスプローラー画面からデプロイしたAPIを右クリックし、デバッガーのアタッチ  
+これでAPIにブレークポイントをはってデバッグ実行が可能
 
 ## データベースマイグレーション
-調査中...
+データベースに変更を加えるとエラーが出るようになる  
+調査し、追記予定
 
 # 参考URL
 https://docs.microsoft.com/ja-jp/azure/app-service-api/app-service-api-dotnet-get-started  
