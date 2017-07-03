@@ -132,14 +132,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HallsController.cs" />
     <Compile Include="Controllers\SessionsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Articles.cs" />
+    <Compile Include="Models\SessionInfo.cs" />
     <Compile Include="Models\Hall.cs" />
     <Compile Include="Models\SampleDataAccess.cs" />
     <Compile Include="Models\Session.cs" />
+    <Compile Include="Models\SessionSpeaker.cs" />
+    <Compile Include="Models\Speaker.cs" />
+    <Compile Include="Models\SpeakerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

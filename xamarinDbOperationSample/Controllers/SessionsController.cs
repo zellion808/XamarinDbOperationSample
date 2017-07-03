@@ -19,15 +19,34 @@ namespace xamarinDbOperationSample.Controllers
         // GET: api/Sessions
         public IQueryable GetSession()
         {
-            var articles = from a in db.Session
-                           join c in db.Hall on a.HallId equals c.HallId
-                           select new
-                           {
-                               Session = a.SessionName,
-                               Hall = c.HallName
-                           };
+            //var sinfo3 = from a in db.Session
+            //                  join c in db.Hall on a.HallId equals c.HallId
+            //                  select new
+            //                  {
+            //                      Session = a.SessionName,
+            //                      Hall = c.HallName
+            //                  };
 
-            return articles;
+            var sessionInfo = from a in db.Session
+                         join c in db.Hall on a.HallId equals c.HallId
+                         select new SessionInfo
+                         {
+                             SessionId = a.SessionId,
+                             SessionName = a.SessionName,
+                             RoomId = a.HallId,
+                             RoomName = c.HallName,
+                             Speakers = from e in db.Speaker
+                                        join f in db.SessionSpeaker on e.SpeakerId equals f.SpeakerId
+                                        join g in db.Session on f.SessionId equals g.SessionId
+                                        where g.SessionId == a.SessionId
+                                        select new SpeakerInfo
+                                        {
+                                            SpeakerId = e.SpeakerId,
+                                            SpeakerName = e.SpeakerName,
+                                        }
+                         };
+
+            return sessionInfo;
         }
 
         // GET: api/Sessions/5
@@ -108,23 +127,6 @@ namespace xamarinDbOperationSample.Controllers
 
             return Ok(session);
         }
-
-        //// JOIN: api/Sessions/5
-        //[ResponseType(typeof(Articles))]
-
-        //public IHttpActionResult Join()
-        //{
-        //    var articles = from a in db.Session
-        //                   join c in db.Hall on a.HallId equals c.HallId
-        //                   select new
-        //                   {
-        //                       Session = a.SessionName,
-        //                       Hall = c.HallName
-        //                   };
-
-        //    return Ok(articles);
-        //}
-
 
         protected override void Dispose(bool disposing)
         {

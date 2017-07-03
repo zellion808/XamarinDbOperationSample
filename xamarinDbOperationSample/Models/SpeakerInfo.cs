@@ -5,9 +5,9 @@ using System.Web;
 
 namespace xamarinDbOperationSample.Models
 {
-    public class Articles
+    public class SpeakerInfo
     {
-        public string Session { get; set;}
-        public string HallName { get; set; }
+        public int SpeakerId { get; set; }
+        public string SpeakerName { get; set; }
     }
 }

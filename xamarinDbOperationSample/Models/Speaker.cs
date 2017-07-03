@@ -7,15 +7,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace xamarinDbOperationSample.Models
 {
-    public class Hall
+    public class Speaker
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int HallId { get; set; }
+        public int SpeakerId { get; set; }
 
         [Required]
-        public string HallName { get; set; }
+        public string SpeakerName { get; set; }
 
-        //public virtual ICollection<Session> Sessions { get; set; }
+        //public virtual ICollection<Session>Sessions { get; set; }
     }
 }
