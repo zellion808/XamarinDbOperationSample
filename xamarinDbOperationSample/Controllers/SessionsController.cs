@@ -51,15 +51,37 @@ namespace xamarinDbOperationSample.Controllers
 
         // GET: api/Sessions/5
         [ResponseType(typeof(Session))]
-        public IHttpActionResult GetSessionById(int id)
+        public IQueryable GetSessionById(int id)
         {
-            Session session = db.Session.Find(id);
-            if (session == null)
-            {
-                return NotFound();
-            }
+            //Session session = db.Session.Find(id);
+            //if (session == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return Ok(session);
+            //return Ok(session);
+
+            var sessionInfo = from a in db.Session
+                              join c in db.Hall on a.HallId equals c.HallId
+                              where a.SessionId == id
+                              select new SessionInfo
+                              {
+                                  SessionId = a.SessionId,
+                                  SessionName = a.SessionName,
+                                  RoomId = a.HallId,
+                                  RoomName = c.HallName,
+                                  Speakers = from e in db.Speaker
+                                             join f in db.SessionSpeaker on e.SpeakerId equals f.SpeakerId
+                                             join g in db.Session on f.SessionId equals g.SessionId
+                                             where g.SessionId == a.SessionId
+                                             select new SpeakerInfo
+                                             {
+                                                 SpeakerId = e.SpeakerId,
+                                                 SpeakerName = e.SpeakerName,
+                                             }
+                              };
+
+            return sessionInfo;
         }
 
         // PUT: api/Sessions/5

@@ -5,7 +5,16 @@
              x:Class="xamarinDbOperationClient.MainPage">
 
     <StackLayout>
-        <Button Text="ボタン" Clicked="Button_Clicked"/>
+        <Button Text="全件取得" Margin="0, 50, 0, 20" Clicked="Button_Clicked"/>
+        <Entry Placeholder="RegisterID" x:Name="rID"/>
+        <Entry Placeholder="SessionID" x:Name="sID"/>
+        <Entry Placeholder="HallID" x:Name="hID"/>
+        <Button Text="登録" Margin="0, 0, 0, 20" Clicked="Button_Clicked2" />
+        <Entry Placeholder="RegisterID" x:Name="rrID"/>
+        <Button Text="登録済み取得" Margin="0, 0, 0, 20" Clicked="Button_Clicked3" />
+        <Entry Placeholder="RegisterID" x:Name="rrrID"/>
+        <Entry Placeholder="SessionID" x:Name="ssID"/>
+        <Button Text="削除" Clicked="Button_Clicked4" />
     </StackLayout>
     
 </ContentPage>

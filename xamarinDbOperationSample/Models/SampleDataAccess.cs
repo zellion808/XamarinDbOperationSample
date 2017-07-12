@@ -12,6 +12,7 @@ namespace xamarinDbOperationSample.Models
         public DbSet<Hall>Hall { get; set; }
         public DbSet<Speaker>Speaker { get; set; }
         public DbSet<SessionSpeaker>SessionSpeaker { get; set; }
+        public DbSet<ParticipatingSession> ParticipatingSession { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
