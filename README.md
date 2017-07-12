@@ -118,8 +118,9 @@ https://docs.microsoft.com/ja-jp/azure/app-service-api/app-service-api-dotnet-ge
 
 ## アプリ開発
 1. http://furuya02.hatenablog.com/entry/2014/10/05/053525  を参考にHTTPClientでリクエストを送る  
-リクエストを送るURLはSwaggerに書いてある
+リクエストを送るURLはSwaggerに書いてある  
 
+2.GETbyIDとDELETEメソッドはURLの末尾に値を連結する（コード参照）  
 
 # その他の情報
 ## APIのリモートデバッグの方法
@@ -128,8 +129,9 @@ VSのサーバーエクスプローラー画面からデプロイしたAPIを右
 これでAPIにブレークポイントをはってデバッグ実行が可能
 
 ## データベースマイグレーション
-データベースに変更を加えるとエラーが出るようになる  
-調査し、追記予定
+データベースに変更を加えるとエラーが出るようになる  
+一旦すべてのテーブルを削除する必要がある  
+詳細は不明
 
 # 参考URL
 https://docs.microsoft.com/ja-jp/azure/app-service-api/app-service-api-dotnet-get-started  
